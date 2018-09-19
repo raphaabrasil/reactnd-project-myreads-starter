@@ -39,13 +39,13 @@ class Home extends Component {
         <div className="list-books-content">
           <div>
             { tab == 0 &&
-              <Bookshelf title='To Read'>
+              <Bookshelf>
                 <Book />
                 <Book />
               </Bookshelf>
             }
             { tab == 1 &&
-              <Bookshelf title='Reading'>
+              <Bookshelf>
                 <Book />
                 <Book />
                 <Book />
@@ -59,7 +59,7 @@ class Home extends Component {
               </Bookshelf>
             }
             { tab == 2 &&
-              <Bookshelf title='Read'>
+              <Bookshelf>
                 <Book />
                 <Book />
               </Bookshelf>
