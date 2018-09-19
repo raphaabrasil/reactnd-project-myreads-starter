@@ -1,30 +1,69 @@
 import React, { Component } from 'react'
 import { Link } from  'react-router-dom'
+import Tabs from '@material-ui/core/Tabs';
+import Tab from '@material-ui/core/Tab';
+
 import Bookshelf from '../components/bookshelf/Bookshelf'
 import Book from '../components/book/Book'
 
 class Home extends Component {
+  state = {
+    tab: 0
+  }
+
+  handleTabChange = (event, tab) => {
+    this.setState({ tab })
+  }
+
   render() {
+    const { tab } = this.state;
+
     return(
       <div className="list-books">
-        <div className="list-books-title">
-          <h1>MyReads</h1>
+        <div className="list-books-header">
+          <div className="list-books-title">
+            <h1>MyReads</h1>
+          </div>
+          <Tabs
+            value={ tab }
+            onChange={ this.handleTabChange }
+            indicatorColor="primary"
+            textColor="primary"
+            centered
+          >
+            <Tab label="To Read" />
+            <Tab label="Reading" />
+            <Tab label="Read" />
+          </Tabs>
         </div>
         <div className="list-books-content">
           <div>
-            <Bookshelf title='Currently Reading'>
-              <Book />
-              <Book />
-            </Bookshelf>
-            <Bookshelf title='Want to Read'>
-              <Book />
-              <Book />
-            </Bookshelf>
-            <Bookshelf title='Already Read'>
-              <Book />
-              <Book />
-              <Book />
-            </Bookshelf>
+            { tab == 0 &&
+              <Bookshelf title='To Read'>
+                <Book />
+                <Book />
+              </Bookshelf>
+            }
+            { tab == 1 &&
+              <Bookshelf title='Reading'>
+                <Book />
+                <Book />
+                <Book />
+                <Book />
+                <Book />
+                <Book />
+                <Book />
+                <Book />
+                <Book />
+                <Book />
+              </Bookshelf>
+            }
+            { tab == 2 &&
+              <Bookshelf title='Read'>
+                <Book />
+                <Book />
+              </Bookshelf>
+            }
           </div>
         </div>
         <div className="open-search">
