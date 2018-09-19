@@ -1,8 +1,25 @@
 import  React, { Component } from 'react'
 import { Link } from 'react-router-dom'
+import Bookshelf from '../components/bookshelf/Bookshelf'
+import Book from '../components/book/Book'
+import * as BooksAPI from '../api/BooksAPI'
+
 
 class Search extends Component {
+  state = {
+    books: []
+  }
+
+  componentDidMount() {
+    BooksAPI.getAll().then(books => {
+      this.setState({ books })
+    })
+
+  }
+
   render() {
+    const { books } = this.state
+
     return (
       <div className="search-books">
         <div className="search-books-bar">
@@ -12,7 +29,19 @@ class Search extends Component {
           </div>
         </div>
         <div className="search-books-results">
-          <ol className="books-grid"></ol>
+          <Bookshelf>
+            { books.map( book => (
+              <Book
+                key={ book.id }
+                title={ book.title }
+                subtitle={ book.subtitle }
+                description={ book.description }
+                authors={ book.authors }
+                imageLinks={ book.imageLinks }
+                shelf={ book.shelf }
+              />
+            ))}
+          </Bookshelf>
         </div>
       </div>
     )
