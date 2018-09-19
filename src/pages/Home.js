@@ -12,15 +12,15 @@ class Home extends Component {
         </div>
         <div className="list-books-content">
           <div>
-            <Bookshelf>
+            <Bookshelf title='Currently Reading'>
               <Book />
               <Book />
             </Bookshelf>
-            <Bookshelf>
+            <Bookshelf title='Want to Read'>
               <Book />
               <Book />
             </Bookshelf>
-            <Bookshelf>
+            <Bookshelf title='Read'>
               <Book />
               <Book />
               <Book />
