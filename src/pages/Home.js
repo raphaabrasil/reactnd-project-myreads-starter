@@ -20,7 +20,7 @@ class Home extends Component {
               <Book />
               <Book />
             </Bookshelf>
-            <Bookshelf title='Read'>
+            <Bookshelf title='Already Read'>
               <Book />
               <Book />
               <Book />
