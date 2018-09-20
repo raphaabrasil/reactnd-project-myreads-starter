@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import TextField from '@material-ui/core/TextField'
 import InputAdornment from '@material-ui/core/InputAdornment'
 import {default as SearchIcon} from '@material-ui/icons/Search'
+import CircularProgress from '@material-ui/core/CircularProgress'
 import Bookshelf from '../components/bookshelf/Bookshelf'
 import Book from '../components/book/Book'
 import * as BooksAPI from '../api/BooksAPI'
@@ -10,13 +11,15 @@ import * as BooksAPI from '../api/BooksAPI'
 
 class Search extends Component {
   state = {
-    books: []
+    books: [],
+    loading: true,
   }
 
   componentDidMount() {
-    BooksAPI.getAll().then(books => {
-      this.setState({ books })
+    BooksAPI.getAll().then( books => {
+      this.setState({ books, loading: false })
     })
+  }
 
   performSearch = e => {
     this.setState({ loading: true })
@@ -27,7 +30,28 @@ class Search extends Component {
   }
 
   render() {
-    const { books } = this.state
+    const { books, loading } = this.state
+
+    let content
+    if ( books.length ) {
+      content = (
+        <Bookshelf>
+          { books.map( book => (
+            <Book
+              key={ book.id }
+              title={ book.title }
+              subtitle={ book.subtitle }
+              description={ book.description }
+              authors={ book.authors }
+              imageLinks={ book.imageLinks }
+              shelf={ book.shelf }
+            />
+          ))}
+        </Bookshelf>
+      )
+    } else {
+      content = <h1 style={{ fontWeight: '100', textAlign: 'center' }}>Coudn't find any book matching this search :(</h1>
+    }
 
     return (
       <div className="search-books">
@@ -53,19 +77,7 @@ class Search extends Component {
           }}
         />
         <div className="search-books-results">
-          <Bookshelf>
-            { books.map( book => (
-              <Book
-                key={ book.id }
-                title={ book.title }
-                subtitle={ book.subtitle }
-                description={ book.description }
-                authors={ book.authors }
-                imageLinks={ book.imageLinks }
-                shelf={ book.shelf }
-              />
-            ))}
-          </Bookshelf>
+          { loading ? (<CircularProgress color="secondary" />) : content }
         </div>
       </div>
     )
