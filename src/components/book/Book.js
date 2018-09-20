@@ -19,12 +19,13 @@ class Book extends Component {
 
   render() {
     const { title, subtitle, authors, imageLinks } = this.props
+    const coverPlaceholder = 'https://i1.wp.com/inasmuchas.org/wp-content/uploads/2013/10/PLACEHOLDER.jpg?resize=178%2C178'
     return (
       <Card style={{ display: 'flex', height: '100%' }}>
         <CardMedia
           component="img"
           className="book-cover"
-          image={ imageLinks.thumbnail }
+          image={ imageLinks ? imageLinks.thumbnail : coverPlaceholder }
           title="Contemplative Reptile"
         />
         <div className="book-description">
@@ -37,17 +38,15 @@ class Book extends Component {
                 { subtitle }
               </Typography>
             )}
-            <Typography paragraph component="p" className="book-authors">
-              { authors.map( (author, idx) => (
-                idx === 0 ? author :  `, ${author}`
-              ))}
-            </Typography>
+            { authors && (
+              <Typography paragraph component="p" className="book-authors">
+                { authors.map( (author, idx) => (
+                  idx === 0 ? author :  `, ${author}`
+                ))}
+              </Typography>
+            )}
           </CardContent>
           <CardActions style={{ justifyContent: 'flex-end' }}>
-            <Button color="primary" style={{ fontSize: 12 }} aria-label="Delete">
-              <AddIcon style={{ fontSize: 18, marginRight: 4 }}/>
-              To Read
-            </Button>
             <Button color="primary" style={{ fontSize: 12 }} aria-label="Delete">
               <AddIcon style={{ fontSize: 18, marginRight: 4 }}/>
               Reading
