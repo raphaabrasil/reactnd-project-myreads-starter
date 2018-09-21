@@ -4,16 +4,23 @@
   width: 100%;
   top: 0;
   z-index: 1000; }
-  .header-bar__title {
+  .header-bar__container {
     padding: 10px 0;
     background: #6545a0;
     text-align: center;
     height: 68px; }
-    .header-bar__title h1 {
+    .header-bar__container__back {
+      position: absolute;
+      left: 20px;
+      color: white;
+      transform: translate(0, 50%); }
+      .header-bar__container__back a {
+        color: white; }
+    .header-bar__container h1 {
       font: 40px 'Cedarville Cursive', cursive;
       line-height: 1.2;
       margin: 0;
       color: white; }
-      .header-bar__title h1 a {
+      .header-bar__container h1 a {
         color: inherit;
         text-decoration: none; }

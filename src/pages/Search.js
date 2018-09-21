@@ -56,21 +56,21 @@ class Search extends Component {
 
     return (
       <div className="search-books">
-        <Header>
-        <TextField
-          id="input-with-icon-textfield"
-          style={{ padding: '20px 140px', backgroundColor: 'white' }}
-          placeholder="Search by title or author"
-          fullWidth
-          onChange={this.performSearch}
-          InputProps={{
-            startAdornment: (
-              <InputAdornment position="start">
-                <SearchIcon />
-              </InputAdornment>
-            ),
-          }}
-        />
+        <Header hasBackButton>
+          <TextField
+            id="input-with-icon-textfield"
+            style={{ padding: '20px 140px', backgroundColor: 'white' }}
+            placeholder="Search by title or author"
+            fullWidth
+            onChange={this.performSearch}
+            InputProps={{
+              startAdornment: (
+                <InputAdornment position="start">
+                  <SearchIcon />
+                </InputAdornment>
+              ),
+            }}
+          />
         </Header>
         <div className="search-books-results">
           { loading ? (<CircularProgress color="secondary" />) : content }

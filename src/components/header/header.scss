@@ -5,12 +5,22 @@
   top: 0;
   z-index: 1000;
 
-  &__title {
+  &__container {
     padding: 10px 0;
     background: #6545a0;
     text-align: center;
     height: 68px;
 
+    &__back {
+      position: absolute;
+      left: 20px;
+      color: white;
+      transform: translate(0, 50%);
+
+      a {
+        color: white;
+      }
+    }
     h1 {
       font: 40px 'Cedarville Cursive', cursive;
       line-height: 1.2;
