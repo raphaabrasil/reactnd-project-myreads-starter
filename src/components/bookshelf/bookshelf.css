@@ -1,0 +1,18 @@
+.bookshelf {
+  padding: 0 60px 20px; }
+  @media (min-width: 1367px) {
+    .bookshelf {
+      padding: 50px 120px 0; } }
+  .bookshelf__books-container {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    justify-content: start;
+    flex-wrap: wrap; }
+    .bookshelf__books-container li {
+      padding: 0 15px;
+      margin-bottom: 30px;
+      text-align: left;
+      flex: 1 1 33.3%;
+      max-width: 33.3%; }

@@ -8,6 +8,7 @@ import Typography from '@material-ui/core/Typography'
 import AddIcon from '@material-ui/icons/Add'
 import PropTypes from 'prop-types'
 
+import './book.css'
 
 class Book extends Component {
   static propTypes = {
@@ -21,14 +22,14 @@ class Book extends Component {
     const { title, subtitle, authors, imageLinks } = this.props
     const coverPlaceholder = 'https://i1.wp.com/inasmuchas.org/wp-content/uploads/2013/10/PLACEHOLDER.jpg?resize=178%2C178'
     return (
-      <Card style={{ display: 'flex', height: '100%' }}>
+      <Card className="book">
         <CardMedia
           component="img"
-          className="book-cover"
+          className="book__cover"
           image={ imageLinks ? imageLinks.thumbnail : coverPlaceholder }
           title="Contemplative Reptile"
         />
-        <div className="book-description">
+        <div className="book__description">
           <CardContent>
             <Typography variant="headline" component="h2">
               { title }
@@ -39,7 +40,7 @@ class Book extends Component {
               </Typography>
             )}
             { authors && (
-              <Typography paragraph component="p" className="book-authors">
+              <Typography paragraph component="p" className="book__authors">
                 { authors.map( (author, idx) => (
                   idx === 0 ? author :  `, ${author}`
                 ))}

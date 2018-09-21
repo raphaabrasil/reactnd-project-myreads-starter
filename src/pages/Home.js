@@ -22,7 +22,7 @@ class Home extends Component {
       <div className="list-books">
         <div className="list-books-header">
           <div className="list-books-title">
-            <h1>MyReads</h1>
+            <h1><Link to="/">MyReads</Link></h1>
           </div>
           <Tabs
             value={ tab }
@@ -31,7 +31,7 @@ class Home extends Component {
             textColor="primary"
             centered
           >
-            <Tab label="To Read" />
+            <Tab label="To Read" to="/search" />
             <Tab label="Reading" />
             <Tab label="Read" />
           </Tabs>
