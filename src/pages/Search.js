@@ -73,7 +73,7 @@ class Search extends Component {
           />
         </Header>
         <div className="search-books-results">
-          { loading ? (<CircularProgress color="secondary" />) : content }
+          { loading ? (<CircularProgress style={{ position: 'absolute', top: '50%', left: '50%' }} size={80} color="primary" />) : content }
         </div>
       </div>
     )
