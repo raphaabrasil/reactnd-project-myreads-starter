@@ -25,8 +25,8 @@ class Search extends Component {
   performSearch = e => {
     this.setState({ loading: true })
     BooksAPI.search(e.target.value).then( books => {
-      books.error ? this.setState({ books: [] }) : this.setState({ books })
-      this.setState({ ...this.state, loading: false })
+      ( books && books.error ) ? this.setState({ books: [] }) : this.setState({ books })
+      this.setState({ loading: false })
     })
   }
 
@@ -34,7 +34,7 @@ class Search extends Component {
     const { books, loading } = this.state
 
     let content
-    if ( books.length ) {
+    if ( books && books.length ) {
       content = (
         <Bookshelf>
           { books.map( book => (
