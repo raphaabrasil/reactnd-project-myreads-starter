@@ -16,28 +16,15 @@ body, .app {
   flex: 1;
 }
 
-.open-search {
-  position: fixed;
-  right: 25px;
-  bottom: 25px;
-}
-.open-search a {
-  display: block;
-  width: 50px;
-  height: 50px;
-  border-radius: 50%;
-  background: #6545a0;
-  background-image: url('./icons/add.svg');
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: 28px;
-  box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
-  font-size: 0;
-}
-
 /* search page */
 
 .search-books-results {
   padding: 150px 10px 20px;
+}
+
+.bottom-button {
+  position: fixed !important; // override material style
+  bottom: 30px;
+  right: 30px;
 }
 

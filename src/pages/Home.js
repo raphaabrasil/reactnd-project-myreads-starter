@@ -1,8 +1,9 @@
 import React, { Component } from 'react'
-import { Link } from  'react-router-dom'
-import Tabs from '@material-ui/core/Tabs';
-import Tab from '@material-ui/core/Tab';
-
+import Tabs from '@material-ui/core/Tabs'
+import Tab from '@material-ui/core/Tab'
+import AddIcon from '@material-ui/icons/Add'
+import Button from '@material-ui/core/Button'
+import { Link } from 'react-router-dom'
 import Bookshelf from '../components/bookshelf/Bookshelf'
 import Book from '../components/book/Book'
 import Header from '../components/header/Header'
@@ -64,9 +65,11 @@ class Home extends Component {
             }
           </div>
         </div>
-        <div className="open-search">
-          <Link to='/search'>Add a book</Link>
-        </div>
+        <Link to="/search">
+          <Button variant="fab" className="bottom-button" color="primary" aria-label="Add">
+            <AddIcon />
+          </Button>
+        </Link>
       </div>
     )
   }
