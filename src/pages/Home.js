@@ -5,6 +5,7 @@ import Tab from '@material-ui/core/Tab';
 
 import Bookshelf from '../components/bookshelf/Bookshelf'
 import Book from '../components/book/Book'
+import Header from '../components/header/Header'
 
 class Home extends Component {
   state = {
@@ -20,10 +21,7 @@ class Home extends Component {
 
     return(
       <div className="list-books">
-        <div className="list-books-header">
-          <div className="list-books-title">
-            <h1><Link to="/">MyReads</Link></h1>
-          </div>
+        <Header>
           <Tabs
             value={ tab }
             onChange={ this.handleTabChange }
@@ -35,7 +33,7 @@ class Home extends Component {
             <Tab label="Reading" />
             <Tab label="Read" />
           </Tabs>
-        </div>
+        </Header>
         <div className="list-books-content">
           <div>
             { tab == 0 &&

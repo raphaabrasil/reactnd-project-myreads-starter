@@ -4,6 +4,7 @@ import TextField from '@material-ui/core/TextField'
 import InputAdornment from '@material-ui/core/InputAdornment'
 import {default as SearchIcon} from '@material-ui/icons/Search'
 import CircularProgress from '@material-ui/core/CircularProgress'
+import Header from '../components/header/Header'
 import Bookshelf from '../components/bookshelf/Bookshelf'
 import Book from '../components/book/Book'
 import * as BooksAPI from '../api/BooksAPI'
@@ -55,19 +56,13 @@ class Search extends Component {
 
     return (
       <div className="search-books">
-        <div className="list-books-header">
-          <div className="list-books-title">
-            <h1><Link to="/">MyReads</Link></h1>
-          </div>
-        </div>
+        <Header>
         <TextField
           id="input-with-icon-textfield"
-          label="TextField"
-          style={{ padding: '60px 120px 0' }}
+          style={{ padding: '20px 140px', backgroundColor: 'white' }}
           placeholder="Search by title or author"
           fullWidth
           onChange={this.performSearch}
-          margin="normal"
           InputProps={{
             startAdornment: (
               <InputAdornment position="start">
@@ -76,6 +71,7 @@ class Search extends Component {
             ),
           }}
         />
+        </Header>
         <div className="search-books-results">
           { loading ? (<CircularProgress color="secondary" />) : content }
         </div>
