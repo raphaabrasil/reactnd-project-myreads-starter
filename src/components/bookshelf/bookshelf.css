@@ -1,8 +1,11 @@
 .bookshelf {
   padding: 0 60px 20px; }
-  @media (min-width: 1367px) {
+  @media (min-width: 1570px) {
     .bookshelf {
       padding: 50px 120px 0; } }
+  @media (max-width: 1024px) {
+    .bookshelf {
+      padding: 50px 10px 20px; } }
   .bookshelf__books-container {
     list-style-type: none;
     padding: 0;
@@ -15,5 +18,12 @@
       margin-bottom: 30px;
       text-align: left;
       flex: 1 1 33.3%;
-      max-width: 33.3%;
-      max-height: 207px; }
+      max-width: 33.3%; }
+      @media (max-width: 1455px) {
+        .bookshelf__books-container li {
+          max-width: 50%;
+          flex: 1 1 50%; } }
+      @media (max-width: 1024px) {
+        .bookshelf__books-container li {
+          max-width: 100%;
+          flex: 1 1 100%; } }
