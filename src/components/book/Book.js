@@ -5,7 +5,6 @@ import CardContent from '@material-ui/core/CardContent'
 import CardMedia from '@material-ui/core/CardMedia'
 import Button from '@material-ui/core/Button'
 import Typography from '@material-ui/core/Typography'
-import AddIcon from '@material-ui/icons/Add'
 import PropTypes from 'prop-types'
 
 import './book.css'
@@ -16,10 +15,11 @@ class Book extends Component {
     subtitle: PropTypes.string,
     authors: PropTypes.array,
     imageLinks: PropTypes.object,
+    shelf: PropTypes.string,
   }
 
   render() {
-    const { title, subtitle, authors, imageLinks } = this.props
+    const { title, subtitle, authors, imageLinks, shelf } = this.props
     const coverPlaceholder = 'https://i1.wp.com/inasmuchas.org/wp-content/uploads/2013/10/PLACEHOLDER.jpg?resize=178%2C178'
     return (
       <Card className="book">
@@ -47,13 +47,14 @@ class Book extends Component {
               </Typography>
             )}
           </CardContent>
-          <CardActions style={{ justifyContent: 'flex-end' }}>
-            <Button color="primary" style={{ fontSize: 12 }} aria-label="Delete">
-              <AddIcon style={{ fontSize: 18, marginRight: 4 }}/>
+          <CardActions style={{ width: '100%', justifyContent: 'flex-end' }}>
+            <Button color="primary" disabled={ shelf === 'wantToRead' } style={{ fontSize: 12 }} aria-label="To Read">
+              To Read
+            </Button>
+            <Button color="primary" disabled={ shelf === 'currentlyReading'} style={{ fontSize: 12 }} aria-label="Reading">
               Reading
             </Button>
-            <Button color="primary" style={{ fontSize: 12 }} aria-label="Delete">
-              <AddIcon style={{ fontSize: 18, marginRight: 4 }}/>
+            <Button color="primary" disabled={ shelf === 'read' } style={{ fontSize: 12 }} aria-label="Already Read">
               Read
             </Button>
           </CardActions>

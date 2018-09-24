@@ -7,10 +7,25 @@ import { Link } from 'react-router-dom'
 import Bookshelf from '../components/bookshelf/Bookshelf'
 import Book from '../components/book/Book'
 import Header from '../components/header/Header'
+import CircularProgress from '@material-ui/core/CircularProgress'
+import * as BooksAPI from '../api/BooksAPI'
 
 class Home extends Component {
   state = {
-    tab: 0
+    tab: 0,
+    reading: [],
+    toRead: [],
+    read: [],
+    loading: true,
+  }
+
+  componentDidMount() {
+    BooksAPI.getAll().then( books => {
+      const toRead = books.filter( book => book.shelf === 'wantToRead')
+      const reading = books.filter( book => book.shelf === 'currentlyReading')
+      const read = books.filter( book => book.shelf === 'read')
+      this.setState({ toRead, reading, read, loading: false })
+    })
   }
 
   handleTabChange = (event, tab) => {
@@ -18,9 +33,9 @@ class Home extends Component {
   }
 
   render() {
-    const { tab } = this.state;
+    const { tab, loading, reading, toRead, read } = this.state;
 
-    return(
+    return (
       <div className="list-books">
         <Header>
           <Tabs
@@ -37,30 +52,52 @@ class Home extends Component {
         </Header>
         <div className="list-books-content">
           <div>
-            { tab == 0 &&
+            { loading && (
+              <CircularProgress style={{ position: 'absolute', top: '50%', left: '50%' }} size={80} color="primary" />
+            )}
+            { tab === 0 &&
               <Bookshelf>
-                <Book />
-                <Book />
+                { toRead.map( book => (
+                  <Book
+                    key={ book.id }
+                    title={ book.title }
+                    subtitle={ book.subtitle }
+                    description={ book.description }
+                    authors={ book.authors }
+                    imageLinks={ book.imageLinks }
+                    shelf={ book.shelf }
+                  />
+                ))}
               </Bookshelf>
             }
-            { tab == 1 &&
+            { tab === 1 &&
               <Bookshelf>
-                <Book />
-                <Book />
-                <Book />
-                <Book />
-                <Book />
-                <Book />
-                <Book />
-                <Book />
-                <Book />
-                <Book />
+                { reading.map( book => (
+                  <Book
+                    key={ book.id }
+                    title={ book.title }
+                    subtitle={ book.subtitle }
+                    description={ book.description }
+                    authors={ book.authors }
+                    imageLinks={ book.imageLinks }
+                    shelf={ book.shelf }
+                  />
+                ))}
               </Bookshelf>
             }
-            { tab == 2 &&
+            { tab === 2 &&
               <Bookshelf>
-                <Book />
-                <Book />
+                { read.map( book => (
+                  <Book
+                    key={ book.id }
+                    title={ book.title }
+                    subtitle={ book.subtitle }
+                    description={ book.description }
+                    authors={ book.authors }
+                    imageLinks={ book.imageLinks }
+                    shelf={ book.shelf }
+                  />
+                ))}
               </Bookshelf>
             }
           </div>
