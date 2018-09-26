@@ -3,6 +3,7 @@ import TextField from '@material-ui/core/TextField'
 import InputAdornment from '@material-ui/core/InputAdornment'
 import {default as SearchIcon} from '@material-ui/icons/Search'
 import CircularProgress from '@material-ui/core/CircularProgress'
+import PropTypes from 'prop-types'
 import Header from '../components/header/Header'
 import Bookshelf from '../components/bookshelf/Bookshelf'
 import Book from '../components/book/Book'
@@ -13,6 +14,10 @@ class Search extends Component {
   state = {
     books: [],
     loading: true,
+  }
+
+  static propTypes = {
+    updateBook: PropTypes.func.isRequired,
   }
 
   componentDidMount() {
@@ -39,12 +44,8 @@ class Search extends Component {
           { books.map( book => (
             <Book
               key={ book.id }
-              title={ book.title }
-              subtitle={ book.subtitle }
-              description={ book.description }
-              authors={ book.authors }
-              imageLinks={ book.imageLinks }
-              shelf={ book.shelf }
+              updateBook={ this.props.updateBook }
+              book={ book }
             />
           ))}
         </Bookshelf>
