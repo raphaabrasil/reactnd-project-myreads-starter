@@ -50,8 +50,10 @@ class Search extends Component {
           ))}
         </Bookshelf>
       )
-    } else {
+    } else if ( books && !books.length) {
       content = <h1 style={{ fontWeight: '100', textAlign: 'center' }}>Coudn't find any book matching this search :(</h1>
+    } else {
+      content = <h1 style={{ fontWeight: '100', textAlign: 'center' }}>Don't know what to read? What about 'Javascript'? :)</h1>
     }
 
     return (
