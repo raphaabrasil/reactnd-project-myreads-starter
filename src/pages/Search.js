@@ -2,7 +2,7 @@ import  React, { Component } from 'react'
 import TextField from '@material-ui/core/TextField'
 import InputAdornment from '@material-ui/core/InputAdornment'
 import {default as SearchIcon} from '@material-ui/icons/Search'
-import CircularProgress from '@material-ui/core/CircularProgress'
+import Loader from '../components/loader/Loader'
 import PropTypes from 'prop-types'
 import Header from '../components/header/Header'
 import Bookshelf from '../components/bookshelf/Bookshelf'
@@ -75,7 +75,7 @@ class Search extends Component {
           />
         </Header>
         <div className="search-books-results">
-          { loading ? (<CircularProgress style={{ position: 'absolute', top: '50%', left: '50%' }} size={80} color="primary" />) : content }
+          { loading ? (<Loader type="default" />) : content }
         </div>
       </div>
     )

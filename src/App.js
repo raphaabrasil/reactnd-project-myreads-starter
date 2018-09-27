@@ -3,7 +3,7 @@ import { Route } from 'react-router-dom'
 import * as BooksAPI from './api/BooksAPI'
 import Home from './pages/Home'
 import Search from './pages/Search'
-import CircularProgress from '@material-ui/core/CircularProgress'
+import Loader from './components/loader/Loader'
 import './App.css'
 
 class BooksApp extends React.Component {
@@ -34,7 +34,6 @@ class BooksApp extends React.Component {
           ...state,
           [newShelf] : [...state[newShelf], book],
         }))
-
       }
       this.setState({ loading: false })
     })
@@ -46,9 +45,10 @@ class BooksApp extends React.Component {
     return (
       <div className="app">
         { loading && (
-          <CircularProgress style={{ position: 'absolute', top: '50%', left: '50%' }} size={80} color="primary" />
+          <Loader type="full" />
         )}
-        <Route exact path='/' render={() => (
+
+        <Route exact path="/" render={() => (
           <Home
             updateShelves={ this.updateShelves }
             updateBook={ this.updateBook }
@@ -57,7 +57,7 @@ class BooksApp extends React.Component {
             read={ read }
           />
         )} />
-        <Route exact path='/search' render={() => (
+        <Route exact path="/search" render={() => (
           <Search
             updateBook={ this.updateBook }
           />
