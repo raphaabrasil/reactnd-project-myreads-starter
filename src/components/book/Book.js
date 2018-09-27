@@ -23,7 +23,7 @@ class Book extends Component {
           component="img"
           className="book__cover"
           image={ book.imageLinks ? book.imageLinks.thumbnail : coverPlaceholder }
-          title="Contemplative Reptile"
+          title={ book.title }
         />
         <div className="book__description">
           <CardContent>
@@ -43,7 +43,7 @@ class Book extends Component {
               </Typography>
             )}
           </CardContent>
-          <CardActions data-book={book.title} style={{ width: '100%', justifyContent: 'flex-end' }}>
+          <CardActions style={{ width: '100%', justifyContent: 'flex-end' }}>
             <Button
               color="primary"
               disabled={ book.shelf === 'wantToRead' }
