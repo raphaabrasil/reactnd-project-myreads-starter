@@ -4,7 +4,9 @@ import CardActions from '@material-ui/core/CardActions'
 import CardContent from '@material-ui/core/CardContent'
 import CardMedia from '@material-ui/core/CardMedia'
 import Button from '@material-ui/core/Button'
+import IconButton from '@material-ui/core/IconButton'
 import Typography from '@material-ui/core/Typography'
+import DeleteIcon from '@material-ui/icons/Delete'
 import PropTypes from 'prop-types'
 import './book.css'
 import coverPlaceholder from './cover_placeholder.jpg'
@@ -17,6 +19,8 @@ class Book extends Component {
 
   render() {
     const { book, updateBook } = this.props
+    console.log( book.shelf )
+    const hasShelf = !!book.shelf // converting value to bool
     return (
       <Card className="book">
         <CardMedia
@@ -68,6 +72,14 @@ class Book extends Component {
             >
               Read
             </Button>
+            { hasShelf  && (
+              <IconButton
+                aria-label="Delete"
+                onClick={ () => updateBook(book, 'none') }
+              >
+                <DeleteIcon fontSize="small" />
+              </IconButton>
+            )}
           </CardActions>
         </div>
       </Card>
