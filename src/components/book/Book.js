@@ -7,6 +7,7 @@ import Button from '@material-ui/core/Button'
 import Typography from '@material-ui/core/Typography'
 import PropTypes from 'prop-types'
 import './book.css'
+import coverPlaceholder from './cover_placeholder.jpg'
 
 class Book extends Component {
   static propTypes = {
@@ -16,7 +17,6 @@ class Book extends Component {
 
   render() {
     const { book, updateBook } = this.props
-    const coverPlaceholder = 'https://i1.wp.com/inasmuchas.org/wp-content/uploads/2013/10/PLACEHOLDER.jpg?resize=178%2C178'
     return (
       <Card className="book">
         <CardMedia
