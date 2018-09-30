@@ -8,7 +8,7 @@ import Header from '../components/header/Header'
 import Bookshelf from '../components/bookshelf/Bookshelf'
 import Book from '../components/book/Book'
 import * as BooksAPI from '../api/BooksAPI'
-
+import './search.css'
 
 class Search extends Component {
   state = {
@@ -51,17 +51,16 @@ class Search extends Component {
         </Bookshelf>
       )
     } else if ( books && !books.length) {
-      content = <h1 style={{ fontWeight: '100', textAlign: 'center' }}>Coudn't find any book matching this search :(</h1>
+      content = <h1>Coudn't find any book matching this search :(</h1>
     } else {
-      content = <h1 style={{ fontWeight: '100', textAlign: 'center' }}>Don't know what to read? What about 'Javascript'? :)</h1>
+      content = <h1>Don't know what to read? What about 'Javascript'? :)</h1>
     }
 
     return (
-      <div className="search-books">
+      <div className="search">
         <Header hasBackButton>
+          <div className="search__bar">
           <TextField
-            id="input-with-icon-textfield"
-            style={{ padding: '20px 140px', backgroundColor: 'white' }}
             placeholder="Search by title or author"
             fullWidth
             onChange={this.performSearch}
@@ -73,8 +72,9 @@ class Search extends Component {
               ),
             }}
           />
+          </div>
         </Header>
-        <div className="search-books-results">
+        <div className="search__results">
           { loading ? (<Loader type="default" />) : content }
         </div>
       </div>

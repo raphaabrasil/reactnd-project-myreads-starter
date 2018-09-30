@@ -13,9 +13,6 @@ body, .app {
   flex: 1; }
 
 /* search page */
-.search-books-results {
-  padding: 150px 10px 20px; }
-
 .bottom-button {
   position: fixed !important;
   bottom: 30px;

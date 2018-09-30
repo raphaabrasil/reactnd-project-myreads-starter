@@ -1,0 +1,16 @@
+.search {
+  &__bar {
+    padding: 20px 140px;
+    background-color: #fff;
+  }
+
+  &__results {
+    padding: 150px 10px 20px;
+
+    h1 {
+      font-weight: 200;
+      text-align: center;
+    }
+  }
+}
+
