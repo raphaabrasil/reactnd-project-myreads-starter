@@ -25,3 +25,8 @@
         font-size: 0.9em; }
       .book__description p {
         font-size: 0.8em; } }
+    .book__description__buttons {
+      width: 100%;
+      justify-content: flex-end; }
+      .book__description__buttons button {
+        font-size: 12px; }

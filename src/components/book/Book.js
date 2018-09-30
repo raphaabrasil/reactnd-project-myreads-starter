@@ -43,11 +43,10 @@ class Book extends Component {
               </Typography>
             )}
           </CardContent>
-          <CardActions style={{ width: '100%', justifyContent: 'flex-end' }}>
+          <CardActions className="book__description__buttons">
             <Button
               color="primary"
               disabled={ book.shelf === 'wantToRead' }
-              style={{ fontSize: 12 }}
               aria-label="To Read"
               onClick={ () => updateBook(book, 'wantToRead') }
             >
@@ -56,7 +55,6 @@ class Book extends Component {
             <Button
               color="primary"
               disabled={ book.shelf === 'currentlyReading'}
-              style={{ fontSize: 12 }}
               aria-label="Reading"
               onClick={ () => updateBook(book, 'currentlyReading') }
             >
@@ -65,7 +63,6 @@ class Book extends Component {
             <Button
               color="primary"
               disabled={ book.shelf === 'read' }
-              style={{ fontSize: 12 }}
               aria-label="Already Read"
               onClick={ () => updateBook(book, 'read') }
             >
