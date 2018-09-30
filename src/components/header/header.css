@@ -3,7 +3,8 @@
   position: fixed;
   width: 100%;
   top: 0;
-  z-index: 1000; }
+  z-index: 1000;
+  background-color: #eee; }
   .header-bar__container {
     padding: 10px 0;
     background: #6545a0;
