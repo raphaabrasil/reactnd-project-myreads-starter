@@ -19,8 +19,7 @@ class Book extends Component {
 
   render() {
     const { book, updateBook } = this.props
-    console.log( book.shelf )
-    const hasShelf = !!book.shelf // converting value to bool
+    const hasShelf = !!book.shelf && book.shelf !== 'none' // converting value to bool
     return (
       <Card className="book">
         <CardMedia
