@@ -28,52 +28,48 @@ class BooksApp extends React.Component {
 		this.setState({ wantToRead, currentlyReading, read, loading: false })
 	}
 
-	getAll = () => {
+	getAll = async() => {
 		this.setState({ loading: true })
-    BooksAPI.getAll().then( books => {
-      this.setState({ searchedBooks: books, loading: false })
-    })
+    const books = await BooksAPI.getAll()
+    this.setState({ searchedBooks: books, loading: false })
 	}
 
-  updateBook = ( book, newShelf ) => {
+  updateBook = async( book, newShelf ) => {
     this.setState({ loading: true })
-    BooksAPI.update(book, newShelf).then( response => {
-      const oldShelf = book.shelf
-      book.shelf = newShelf
-      if (oldShelf !== 'none' && newShelf !== 'none') {
-        this.setState( state => ({
-          ...state,
-          [oldShelf] : state[oldShelf].filter( b => b.id !== book.id),
-          [newShelf] : [...state[newShelf], book],
-        }))
-      } else if (oldShelf && newShelf === 'none') {
-         this.setState( state => ({
-          ...state,
-          [oldShelf] : state[oldShelf].filter( b => b.id !== book.id),
-        }))
-
-      } else {
-        this.setState( state => ({
-          ...state,
-          [newShelf] : [...state[newShelf], book],
-        }))
-      }
-      this.setState({ loading: false })
-    })
+    const response = await BooksAPI.update(book, newShelf)
+    const oldShelf = book.shelf
+    book.shelf = newShelf
+    if (oldShelf !== 'none' && newShelf !== 'none') {
+      this.setState( state => ({
+				...state,
+        [oldShelf] : state[oldShelf].filter( b => b.id !== book.id),
+        [newShelf] : [...state[newShelf], book],
+      }))
+    } else if (oldShelf && newShelf === 'none') {
+			this.setState( state => ({
+				...state,
+        [oldShelf] : state[oldShelf].filter( b => b.id !== book.id),
+      }))
+    } else {
+			this.setState( state => ({
+				...state,
+        [newShelf] : [...state[newShelf], book],
+      }))
+    }
+    this.setState({ loading: false })
 	}
 
-	performSearch = e => {
+	performSearch = async( e ) => {
     this.setState({ loading: true })
 
-    BooksAPI.search(e.target.value).then( books => {
-			if ( !books || books.error ) {
-				this.setState({ searchedBooks: [] })
-			} else {
-				books.map( book => book.shelf = this.getBookShelf(book.id))
-				this.setState({ searchedBooks: books })
-			}
-		  this.setState({ loading: false })
-		})
+    const books = await BooksAPI.search(e.target.value)
+		if ( !books || books.error ) {
+			this.setState({ searchedBooks: [] })
+		} else {
+			books.map( book => book.shelf = this.getBookShelf(book.id))
+			this.setState({ searchedBooks: books })
+		}
+		this.setState({ loading: false })
 	}
 
 	getBookShelf = book_id => {
