@@ -17,11 +17,29 @@ class Book extends Component {
     updateBook: PropTypes.func,
   }
 
+  getLabel = shelf => {
+    if ( shelf == 'wantToRead') {
+      return 'To Read'
+    } else if ( shelf == 'currentlyReading') {
+      return 'Reading'
+    }
+    return 'Read'
+  }
+
   render() {
     const { book, updateBook } = this.props
     const hasShelf = !!book.shelf && book.shelf !== 'none' // converting value to bool
+    let shelfIndicator
+    if ( hasShelf ) {
+      shelfIndicator = (
+        <div className="book__current-shelf">
+          { this.getLabel(book.shelf) }
+        </div>
+      )
+    }
     return (
       <Card className="book">
+        { hasShelf && shelfIndicator }
         <CardMedia
           component="img"
           className="book__cover"
