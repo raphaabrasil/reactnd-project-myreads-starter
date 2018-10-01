@@ -36,7 +36,7 @@ class BooksApp extends React.Component {
 
   updateBook = async( book, newShelf ) => {
     this.setState({ loading: true })
-    const response = await BooksAPI.update(book, newShelf)
+    await BooksAPI.update(book, newShelf)
     const oldShelf = book.shelf
     book.shelf = newShelf
     if (oldShelf !== 'none' && newShelf !== 'none') {
