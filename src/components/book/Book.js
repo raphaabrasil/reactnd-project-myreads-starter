@@ -18,9 +18,9 @@ class Book extends Component {
   }
 
   getLabel = shelf => {
-    if ( shelf == 'wantToRead') {
+    if ( shelf === 'wantToRead') {
       return 'To Read'
-    } else if ( shelf == 'currentlyReading') {
+    } else if ( shelf === 'currentlyReading') {
       return 'Reading'
     }
     return 'Read'

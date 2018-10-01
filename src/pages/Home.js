@@ -8,7 +8,6 @@ import { Link } from 'react-router-dom'
 import Bookshelf from '../components/bookshelf/Bookshelf'
 import Book from '../components/book/Book'
 import Header from '../components/header/Header'
-import * as BooksAPI from '../api/BooksAPI'
 
 class Home extends Component {
   state = {
@@ -16,20 +15,10 @@ class Home extends Component {
   }
 
   static propTypes = {
-    updateShelves: PropTypes.func.isRequired,
     updateBook: PropTypes.func.isRequired,
     currentlyReading: PropTypes.array.isRequired,
     wantToRead: PropTypes.array.isRequired,
     read: PropTypes.array.isRequired,
-  }
-
-  componentDidMount() {
-    BooksAPI.getAll().then( books => {
-      const wantToRead = books.filter( book => book.shelf === 'wantToRead')
-      const currentlyReading = books.filter( book => book.shelf === 'currentlyReading')
-      const read = books.filter( book => book.shelf === 'read')
-      this.props.updateShelves(wantToRead, currentlyReading, read)
-    })
   }
 
   handleTabChange = (event, tab) => {

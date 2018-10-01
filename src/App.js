@@ -11,12 +11,30 @@ class BooksApp extends React.Component {
     currentlyReading: [],
     wantToRead: [],
     read: [],
+		searchedBooks: [],
     loading: false,
   }
 
-  updateShelves = (wantToRead = [], currentlyReading = [], read = []) => {
-    this.setState({ wantToRead, currentlyReading, read, loading: false })
-  }
+	filter_books = ( books, shelf ) => books.filter( b => b.shelf === shelf )
+  filterBy = ( books, shelf ) => this.filter_books( books, shelf )
+
+	mountShelves = () => {
+		BooksAPI.getAll().then( books => {
+
+      const wantToRead = this.filterBy(books, 'wantToRead')
+      const currentlyReading = this.filterBy(books, 'currentlyReading')
+      const read = this.filterBy(books, 'read')
+
+			this.setState({ wantToRead, currentlyReading, read, loading: false })
+    })
+	}
+
+	getAll = () => {
+		this.setState({ loading: true })
+    BooksAPI.getAll().then( books => {
+      this.setState({ searchedBooks: books, loading: false })
+    })
+	}
 
   updateBook = ( book, newShelf ) => {
     this.setState({ loading: true })
@@ -43,10 +61,41 @@ class BooksApp extends React.Component {
       }
       this.setState({ loading: false })
     })
-  }
+	}
+
+	performSearch = e => {
+    this.setState({ loading: true })
+
+    BooksAPI.search(e.target.value).then( books => {
+			if ( !books || books.error ) {
+				this.setState({ searchedBooks: [] })
+			} else {
+				books.map( book => book.shelf = this.getBookShelf(book.id))
+				this.setState({ searchedBooks: books })
+			}
+		  this.setState({ loading: false })
+		})
+	}
+
+	getBookShelf = book_id => {
+		const filter = shelf => this.state[shelf].filter( book => book.id === book_id)
+		let found
+
+		found = filter('wantToRead')
+		if (found.length) return 'wantToRead'
+		found = filter('currentlyReading')
+		if (found.length) return 'currentlyReading'
+		found = filter('read')
+		if (found.length) return 'read'
+		return 'none'
+	}
+
+	componentDidMount() {
+		this.mountShelves()
+	}
 
   render() {
-    const { currentlyReading, wantToRead, read, loading } = this.state
+    const { searchedBooks, currentlyReading, wantToRead, read, loading } = this.state
 
     return (
       <div className="app">
@@ -56,7 +105,6 @@ class BooksApp extends React.Component {
 
         <Route exact path="/" render={() => (
           <Home
-            updateShelves={ this.updateShelves }
             updateBook={ this.updateBook }
             currentlyReading={ currentlyReading }
             wantToRead= { wantToRead }
@@ -65,7 +113,10 @@ class BooksApp extends React.Component {
         )} />
         <Route exact path="/search" render={() => (
           <Search
-            updateBook={ this.updateBook }
+						getAll={ this.getAll }
+						updateBook={ this.updateBook }
+						performSearch={ this.performSearch }
+						searchedBooks={ searchedBooks }
           />
         )} />
       </div>
