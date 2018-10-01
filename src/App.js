@@ -16,18 +16,16 @@ class BooksApp extends React.Component {
   }
 
 
-	mountShelves = () => {
+	async mountShelves() {
 		this.setState({ loading: true })
-		BooksAPI.getAll().then( books => {
+		const books = await BooksAPI.getAll()
+		const filter_books = ( books, shelf ) => books.filter( b => b.shelf === shelf )
+		const filterBy = ( books, shelf ) => filter_books( books, shelf )
+    const wantToRead = filterBy(books, 'wantToRead')
+    const currentlyReading = filterBy(books, 'currentlyReading')
+    const read = filterBy(books, 'read')
 
-			const filter_books = ( books, shelf ) => books.filter( b => b.shelf === shelf )
-			const filterBy = ( books, shelf ) => filter_books( books, shelf )
-      const wantToRead = filterBy(books, 'wantToRead')
-      const currentlyReading = filterBy(books, 'currentlyReading')
-      const read = filterBy(books, 'read')
-
-			this.setState({ wantToRead, currentlyReading, read, loading: false })
-    })
+		this.setState({ wantToRead, currentlyReading, read, loading: false })
 	}
 
 	getAll = () => {
@@ -91,8 +89,8 @@ class BooksApp extends React.Component {
 		return 'none'
 	}
 
-	componentDidMount() {
-		this.mountShelves()
+	async componentDidMount() {
+		await this.mountShelves()
 	}
 
   render() {
