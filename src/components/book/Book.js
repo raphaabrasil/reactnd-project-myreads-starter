@@ -8,6 +8,7 @@ import IconButton from '@material-ui/core/IconButton'
 import Typography from '@material-ui/core/Typography'
 import DeleteIcon from '@material-ui/icons/Delete'
 import PropTypes from 'prop-types'
+import ReactStars from 'react-stars'
 import './book.css'
 import coverPlaceholder from './cover_placeholder.jpg'
 
@@ -26,9 +27,19 @@ class Book extends Component {
     return 'Read'
   }
 
+  ratingChanged = (newRating) => {
+    localStorage.setItem(`my-reads-rating-${this.props.book.id}`, newRating)
+  }
+
+  getRatingValue = ( book_id ) => {
+    const value = localStorage.getItem(`my-reads-rating-${book_id}`)
+    return value ? parseFloat(value) : 0
+  }
+
   render() {
     const { book, updateBook } = this.props
     const hasShelf = !!book.shelf && book.shelf !== 'none' // converting value to bool
+    const ratingValue = this.getRatingValue(book.id)
     let shelfIndicator
     if ( hasShelf ) {
       shelfIndicator = (
@@ -63,6 +74,13 @@ class Book extends Component {
                 ))}
               </Typography>
             )}
+            <ReactStars
+              className="book__description__rating"
+              onChange={ this.ratingChanged }
+              value={ ratingValue }
+              size={ 20 }
+              color2={ "#e8cb31" }
+            />
           </CardContent>
           <CardActions className="book__description__buttons">
             <Button

@@ -36,9 +36,13 @@
     align-items: flex-start;
     justify-content: space-between;
 
+    h3 {
+      font-size: 0.93em;
+    }
+
     @media (max-width: 1366px) {
       h2 {
-        font-size: 1.2em;
+        font-size: 1.3em;
         line-height: 1.2;
         margin-bottom: 0.1em;
       }
