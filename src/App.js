@@ -41,7 +41,7 @@ class BooksApp extends React.Component {
     BooksAPI.update(book, newShelf).then( response => {
       const oldShelf = book.shelf
       book.shelf = newShelf
-      if (oldShelf && newShelf !== 'none') {
+      if (oldShelf !== 'none' && newShelf !== 'none') {
         this.setState( state => ({
           ...state,
           [oldShelf] : state[oldShelf].filter( b => b.id !== book.id),
